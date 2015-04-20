@@ -44,7 +44,7 @@ module.exports = {
 
 	getDataFromLine : function(line) {
 		var dataArray = [];
-		var tempString;
+		var tempString="";
 		for(var index=0; index<line.length; index++) {
 			if(line[index]=='"') {
 				var index2=index+1;
@@ -54,7 +54,7 @@ module.exports = {
 				}
 				dataArray.push(tempString);
 				tempString = "";
-				index = index2;
+				index = index2 + 1;
 			}else if(line[index] != ",") {
 				tempString += line[index];
 			} else {
