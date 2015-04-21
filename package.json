@@ -1,6 +1,6 @@
 {
   "name": "csv-array",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "description": "This is a CSV parser created and made for nodeJS. Which takes a csv file and produce an array from it",
   "main": "csv-array.js",
   "scripts": {},
@@ -9,7 +9,7 @@
     "url": "https://github.com/sguha-work/CSV-parse-node.git"
   },
   "author": "Sahasrangshu Guha",
-  "license": "GNU",
+  "license": "MIT",
   "engines": "v0.8.15",
   "dependencies": {
     "fs": "0.0.2"
