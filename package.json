@@ -1,7 +1,7 @@
 {
-  "name": "CSV-parse",
+  "name": "csv-array",
   "version": "0.0.1",
-  "description": "This is a CSV parser created and made for nodeJS",
+  "description": "This is a CSV parser created and made for nodeJS. Which takes a csv file and produce an array from it",
   "main": "csv-parse.js",
   "scripts": {},
   "repository": {

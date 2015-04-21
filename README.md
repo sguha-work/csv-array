@@ -1,4 +1,4 @@
-#CSV-parse
+#csv-array
 > Simple. lighweight, intelligent CSV-parser for nodeJS
 
 ## Dependencies
@@ -18,7 +18,7 @@ After installing the package you can use the "parseCSV" method as follows
 ### Example
 
 ```javascript
- var csv = require('CSV-parse');
+ var csv = require('csv-array');
  csv.parseCSV("test.csv", function(data){
    console.log(JSON.stringify(data));
  });
