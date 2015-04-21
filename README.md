@@ -1,6 +1,13 @@
 #CSV-parse
 
-##Usage Guide
+## Dependencies
+This package got only one dependency of "fs". You may install that first using following command
+
+```
+npm install fs
+```
+
+## Usage Guide
 After installing the package you can use the "parseCSV" method as follows
 ```
  parseCSV("CSV-file-name.csv", callBack)
