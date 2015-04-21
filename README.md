@@ -1,5 +1,5 @@
 #CSV-parse
-
+> Simple. lighweight, intelligent CSV-parser for nodeJS
 ## Dependencies
 This package got only one dependency of "fs". You may install that first using following command
 
