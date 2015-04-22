@@ -1,10 +1,17 @@
 module.exports = {
+	maxSizeForDirectRead : 10000000,
 	parseCSV : function(fileName, callBack) {
 		var presentInstance = this;
 		var fs = require('fs');
 		fs.exists(fileName, function(exists) {
 			if(exists) {
-				presentInstance.parseFile(fileName, callBack);
+				fs.stat(fileName, function(err, stats){
+					if(stats.size > presentInstance.maxSizeForDirectRead) {
+						presentInstance.parseBigFile(fileName, callBack);
+					} else {
+						presentInstance.parseFile(fileName, callBack);	
+					}
+				});
 			} else {
 				console.log("The provided file " + fileName + " doesn't exists or inaccessible");
 			}
@@ -26,6 +33,7 @@ module.exports = {
 		return dataArray;
 	},
 
+	// returns total data
 	getDataArray : function(dataArray) {
 		presentInstance = this;
 		var attributeNameArray = dataArray[0].split(",");
@@ -42,6 +50,7 @@ module.exports = {
 
 	},
 
+	// returns data from a single line 
 	getDataFromLine : function(line) {
 		var dataArray = [];
 		var tempString="";
@@ -63,6 +72,48 @@ module.exports = {
 			}
 		}
 		return dataArray;
+	},
+	tempLineCounter : 0,// only used for large files
+	tempDataArray : [],// only used for large files
+	tempAttributeNameArray : [],// only used for large files
+	parseBigFile : function(fileName, callBack) {
+		var presentObject = module.exports;
+		var lblReader = require('line-by-line');
+		var readStream = new lblReader(fileName);
+
+		presentObject.tempDataArray = [];
+		presentObject.tempAttributeNameArray = [];
+		presentObject.tempLineCounter = 0;
+		
+		readStream.on('error', function(){
+			console.log("cannot read the file any more.");
+		});
+		readStream.on('line', function(line) {
+			readStream.pause();
+			presentObject.buildOutputData(line);
+			setTimeout(function() {
+				readStream.resume();
+			},100);
+			
+		});
+		readStream.on('end', function() {
+			callBack(presentObject.tempDataArray);
+		});
+	},
+
+	buildOutputData : function(line) {
+		var presentObject = module.exports;
+		if(presentObject.tempLineCounter == 0) {
+			presentObject.tempAttributeNameArray = line.split(",");
+		} else {
+			var dataArray = presentObject.getDataFromLine(line);
+			var tempObject = {};
+			for(var index=0; index<presentObject.tempAttributeNameArray.length; index++) {
+				tempObject[presentObject.tempAttributeNameArray[index]] = dataArray[index];
+			}
+			presentObject.tempDataArray.push(tempObject);
+		}
+		presentObject.tempLineCounter += 1;
 	}
 
 }

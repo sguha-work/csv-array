@@ -9,17 +9,18 @@
     "url": "https://github.com/sguha-work/csv-array.git"
   },
   "keywords": [
-	"csv",
-	"array",
-	"csv-array",
-	"parsing",
-	"parse csv",
-	"convert csv"
+    "csv",
+    "array",
+    "csv-array",
+    "parsing",
+    "parse csv",
+    "convert csv"
   ],
   "author": "Sahasrangshu Guha",
   "license": "MIT",
   "engines": "v0.8.15",
   "dependencies": {
-    "fs": "0.0.2"
+    "fs": "0.0.2",
+    "line-by-line": "~0.1.3"
   }
 }
