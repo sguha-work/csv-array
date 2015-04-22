@@ -38,10 +38,12 @@ module.exports = {
 		presentInstance = this;
 		var attributeNameArray = dataArray[0].split(",");
 		var finalArray = [];
-		for(var index=1; index<dataArray.length; index++) {
+		var length = dataArray.length;
+		for(var index=1; index<length; index++) {
 			var tempArray = {};
 			var dataList = presentInstance.getDataFromLine(dataArray[index]);
-			for(var index2=0; index2<attributeNameArray.length; index2++) {
+			var atrributeNameArrayLength = attributeNameArray.length;
+			for(var index2=0; index2<atrributeNameArrayLength; index2++) {
 				tempArray[attributeNameArray[index2]] = dataList[index2];
 			}
 			finalArray.push(tempArray);
@@ -53,7 +55,8 @@ module.exports = {
 	getDataFromLine : function(line) {
 		var dataArray = [];
 		var tempString="";
-		for(var index=0; index<line.length; index++) {
+		var lineLength = line.length;
+		for(var index=0; index<lineLength; index++) {
 			if(line[index]=='"') {
 				var index2=index+1;
 				while(line[index2]!='"') {
@@ -107,7 +110,8 @@ module.exports = {
 		} else {
 			var dataArray = presentObject.getDataFromLine(line);
 			var tempObject = {};
-			for(var index=0; index<presentObject.tempAttributeNameArray.length; index++) {
+			var tempAttributeNameArrayLength = presentObject.tempAttributeNameArray.length;
+			for(var index=0; index<tempAttributeNameArrayLength; index++) {
 				tempObject[presentObject.tempAttributeNameArray[index]] = dataArray[index];
 			}
 			presentObject.tempDataArray.push(tempObject);
