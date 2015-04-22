@@ -47,7 +47,6 @@ module.exports = {
 			finalArray.push(tempArray);
 		}
 		return finalArray;
-
 	},
 
 	// returns data from a single line 
@@ -93,7 +92,7 @@ module.exports = {
 			presentObject.buildOutputData(line);
 			setTimeout(function() {
 				readStream.resume();
-			},100);
+			},50);
 			
 		});
 		readStream.on('end', function() {
