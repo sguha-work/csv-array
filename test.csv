@@ -1,3 +1,82 @@
-Question Statement,Option 1,Option 2,Option 3,Option 4,Option 5,Answer,Deficulty,Category
-this is a test question answer it?,answer 1,answer 2,answer3,answer 4,,answer 2,3,test
-this is another test question answer it?,"answer1,answer2","answer2,answer3","answer4,answer5","answer5,answer6","answer7,answer8","answer1,answer2",2,test
+Section Title,Examples Needed,Final Fiddle URL,Visualization Type,Chart Type,Chart Elements,Features,Note,Fiddle Title
+Heat Map Chart,Simple Heat Map Chart,http://jsfiddle.net/fusioncharts/LsSU9/,Chart,Heat Map Chart,,,,A sample heatmap chart
+,Category-based Heat Map,http://jsfiddle.net/fusioncharts/4qg2v27x/,Chart,Heat Map Chart,,,,A sample category based heatmap chart
+,Numeric-based Heat Map,http://jsfiddle.net/fusioncharts/q4foh868/,Chart,Heat Map Chart,,,,A sample Numeric Heatmap Chart
+,Pre defined rows and columns,http://jsfiddle.net/fusioncharts/L17eLvs3/,Chart,Heat Map Chart,,,,Customizing pre defined rows and columns in heatmap chart
+,Heat map chart configured for legend cosmetics,http://jsfiddle.net/fusioncharts/oys1k6k6/,Chart,Heat Map Chart,Legend,,,Configuring legend cosmetics in Heat map chart
+,Using Icon legend in Heat Map Chart,http://jsfiddle.net/fusioncharts/L6n9bn7z/,Chart,Heat Map Chart,Legend,,,Configuring legend in heatmap chart
+,Snap to tick for Legend Pointers,,Chart,Heat Map Chart,Legend,,,
+,Mapping Values By Percentage,http://jsfiddle.net/fusioncharts/Lefgc9ze/,Chart,Heat Map Chart,,,,Mapping values by percentage in heatmap chart
+,Heat map chart for configuring labels,http://jsfiddle.net/fusioncharts/w6xoyjky/,Chart,Heat Map Chart,Label,,,Configuring labels in heatmap chart
+,Heat map chart for configuring tool-tips,http://jsfiddle.net/fusioncharts/bgv553mj/,Chart,Heat Map Chart,Tool Tips,,,Configuring tooltip for heatmap labels
+,Handling out of range data in heat map chart,http://jsfiddle.net/fusioncharts/48sa9jfw/,Chart,Heat Map Chart,,,,Customizing out of range data in heatmap chart
+Drag-node Chart,Sample 1:,No Final Fiddle,Chart,Drag Node Chart,,,,
+,Sample 2,No Final Fiddle,Chart,Drag Node Chart,,,,
+,Sample 3,http://jsfiddle.net/fusioncharts/wg4jmf0n/,Chart,Drag Node Chart,Data plots,,,A sample drag node chart 
+,With different strength of connectors,,Chart,Drag Node Chart,,,,
+,With An added Node to show connector addition,http://jsfiddle.net/fusioncharts/rk9t21g8/,Chart,Drag Node Chart,Nodes,,,Drag node chart with an added node
+Drag-able Charts,Drag column,http://jsfiddle.net/fusioncharts/jz8sfbLs/,Chart,Drag-able Charts,,Listening to Events,,Drag column chart with table 
+,Drag Area,http://jsfiddle.net/fusioncharts/b6999xdf/,Chart,Drag-able Charts,,Listening to Events,,A sample drag area chart 
+,Drag Line,http://jsfiddle.net/fusioncharts/0rusyujb/,Chart,Drag-able Charts,,Listening to Events,,A sample drag line chart 
+,Snapping to nearest divisional interval,http://jsfiddle.net/fusioncharts/oq5vqv7n/,Chart,Drag-able Charts,Data plots,Listening to Events,,Configuring data plots in a drag-able chart
+,Managing chart limits using JavaScript API,http://jsfiddle.net/fusioncharts/r8fgby9g/,Chart,Drag-able Charts,,Limits,,Drag-able chart Managing chart limits using JavaScript API
+,Getting chart data,http://jsfiddle.net/fusioncharts/d6cLm0em/,Chart,Drag-able Charts,,,,A sample drag column chart with data in JSON format
+,Getting data with getDataWithId method,http://jsfiddle.net/fusioncharts/cvcn499t/,Chart,Drag-able Charts,,,,A sample drag column chart with data in JSON format
+,Getting data with getData method,http://jsfiddle.net/fusioncharts/qzm79rsv/,Chart,Drag-able Charts,,,,A sample drag column chart with data in JSON format
+Select Scatter Chart,Select Scatter Chart,http://jsfiddle.net/fusioncharts/qrgqyuus/,Chart,Select-Scatter Chart,,,,A sample select scatter chart
+Radar Chart,Radar Chart,http://jsfiddle.net/fusioncharts/gqLerkph/,Chart,Radar Chart,,,,A sample radar chart 
+,,http://jsfiddle.net/fusioncharts/64v13yyy/,Chart,Radar Chart,,,,A sample radar chart 
+Multi-axis Line Chart,Multi-axis Line Chart,http://jsfiddle.net/fusioncharts/z4gf0xnh/,Chart,Multi-axis Line Chart,,,,A sample multi axis line chart
+Multi-level Pie Chart,Multi-level Pie Chart,http://jsfiddle.net/fusioncharts/njjra2r4/,Chart,Multi-level Pie Chart,,,,A sample multi level pie chart 
+Candlestick Chart,Candlestick Chart,http://jsfiddle.net/fusioncharts/Hcm78/,Chart,Candlestick Chart,,,,A sample Candlestick chart
+,Using different plot type,http://jsfiddle.net/fusioncharts/b3xfLrmg/,Chart,Candlestick Chart,Data plots,,,Configuring data plots in CandleStick chart
+,Hiding volume chart,http://jsfiddle.net/fusioncharts/urzeqo6d/,Chart,Candlestick Chart,,,,Hiding volume based chart in CandleStick chart
+,Showing trendlines and v-trendlines,http://jsfiddle.net/fusioncharts/Lr0ebb33/,Chart,Candlestick Chart,Trend lines,,,Configuring trend lines in CandleStick chart
+,Showing trendsets,http://jsfiddle.net/fusioncharts/hqvpoLrm/,Chart,Candlestick Chart,Trend Sets,,,Configuring trend sets in CandleStick chart
+Waterfall or Cascade Chart,Waterfall or Cascade Chart,http://jsfiddle.net/fusioncharts/r9uwA/,Chart,Waterfall Chart,,,,A sample waterfall chart 
+,Not show sum at end,http://jsfiddle.net/fusioncharts/rpun19u9/,Chart,Waterfall Chart,,,,Configuring data plots in waterfall chart
+,Connector line configuration,http://jsfiddle.net/fusioncharts/mo48mf9s/,Chart,Waterfall Chart,Connectors,,,Configuring connector lines in Waterfall chart
+Box and Whisker,Base Sample,http://jsfiddle.net/fusioncharts/qLvZF/,Chart,Box and Whisker Chart,,,,A sample Box And Whisker chart
+,Legend in Box and Whisker,Has Issue,Chart,Box and Whisker Chart,Legend,,,
+,Show all five-summary numbers,http://jsfiddle.net/fusioncharts/q89k0bef/,Chart,Box and Whisker Chart,Data values,,,Configuring data values in Box And Whisker chart 
+,Showing mean in Box and Whisker,http://jsfiddle.net/fusioncharts/nab0nrot/,Chart,Box and Whisker Chart,Data values,,,Configuring data values in Box And Whisker chart 
+,Show or hide individual mean values,http://jsfiddle.net/fusioncharts/c0bgz3sh/,Chart,Box and Whisker Chart,Data values,,,Configuring data values in Box And Whisker chart 
+,Showing Mean Connectors,http://jsfiddle.net/fusioncharts/8r57f085/,Chart,Box and Whisker Chart,,,,Configuring data values in Box And Whisker chart 
+,Skip null data for Mean Connectors,http://jsfiddle.net/fusioncharts/f97r3pvs/,Chart,Box and Whisker Chart,Mean,,,Configuring data values in Box And Whisker chart 
+,Showing Mean Deviation,http://jsfiddle.net/fusioncharts/Lpv80hyy/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Show or hide individual mean deviation values,http://jsfiddle.net/fusioncharts/3janzmmk/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Showing Mean deviation Connectors,http://jsfiddle.net/fusioncharts/e7qm0v65/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Skip null data for Mean deviation Connectors,http://jsfiddle.net/fusioncharts/95waeko1/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Showing Standard Deviation,http://jsfiddle.net/fusioncharts/8pxgqsnt/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Show or hide individual standard deviation values,http://jsfiddle.net/fusioncharts/nvkzdq10/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Showing Standard deviation Connectors,http://jsfiddle.net/fusioncharts/ubjvvkq6/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Skip null data for Standard Deviation Connectors,http://jsfiddle.net/fusioncharts/aywg4p49/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Showing quartile deviation values,http://jsfiddle.net/fusioncharts/eqj94L27/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Show or hide individual quartile deviation values,http://jsfiddle.net/fusioncharts/hgn1zmuq/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Showing Quartile deviation Connectors,http://jsfiddle.net/fusioncharts/znLse1vz/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Skip null data for Quartile Deviation Connectors,http://jsfiddle.net/fusioncharts/q97eLpLy/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Configuring Outliers,http://jsfiddle.net/fusioncharts/01dmxvgq/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Outliers beyond the range of y-axis,http://jsfiddle.net/fusioncharts/23vktkrv/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+,Show all Outliers,http://jsfiddle.net/fusioncharts/arcdvvLb/,Chart,Box and Whisker Chart,Data plots,,,Configuring data plots in Box And Whisker chart
+Error Charts,Error Line,http://jsfiddle.net/fusioncharts/qutLzs7m/,Chart,Error Line Chart,,,,A sample error line chart
+,Error Bar,http://jsfiddle.net/fusioncharts/7Z4Ha/,Chart,Error Bar Chart,,,,A sample error bar chart
+,Error Scatter,http://jsfiddle.net/fusioncharts/uV3cB/,Chart,Error Scatter Chart,,,,A sample error scatter chart 
+,Error Bar configuration in ErrorLine chart,http://jsfiddle.net/fusioncharts/ye8zwnkz/,Chart,Error Line Chart,Error Bars,,,Error line chart configurations
+,Error Bar configuration in ErrorScatter chart,http://jsfiddle.net/fusioncharts/e4rvjc37/,Chart,Error Scatter Chart,Error Bars,,,Customized error bars in error scatter chart 
+,Error Bar configuration in ErrorBar 2D chart,http://jsfiddle.net/fusioncharts/fumzvpw3/,Chart,Error Bar Chart,Error Bars,,,Customized error bars in error bar chart 
+Spline Charts,Spline Charts,http://jsfiddle.net/fusioncharts/9C9pj/,Chart,Spline Charts,,,,A sample Spline chart 
+,,http://jsfiddle.net/fusioncharts/tnt27/,Chart,Spline Charts,,,,A sample multi-series Spline chart 
+,,http://jsfiddle.net/fusioncharts/gwRWL/,Chart,Spline Charts,,,,A sample spline area chart 
+,,http://jsfiddle.net/fusioncharts/W9Bn6/,Chart,Spline Charts,,,,A sample multi-series Spline area chart 
+Inverse y-Axis Charts,Inverse-Column,http://jsfiddle.net/fusioncharts/85Lqpmd3/,Chart,Inverse Y Axis Charts,,,,A sample inverse y-axis column chart
+,Inverse-Line,http://jsfiddle.net/fusioncharts/FJL6V/,Chart,Inverse Y Axis Charts,,,,A sample inverse y-axis line chart 
+,Inverse - Area,http://jsfiddle.net/fusioncharts/S38mg/,Chart,Inverse Y Axis Charts,,,,A sample multi series inverse area chart
+Logarithmic Charts,Logarithmic Charts,http://jsfiddle.net/fusioncharts/LSdTC/,Chart,Logarithmic Charts,,,,A sample logarithmic multi-series line chart 
+,,http://jsfiddle.net/fusioncharts/kEeUR/,Chart,Logarithmic Charts,,,,A sample logarithmic multi-series column chart 
+,,http://jsfiddle.net/fusioncharts/dfdc2f9p/,Chart,Logarithmic Charts,,,,A sample logarithmic column chart with custom log base
+,,http://jsfiddle.net/fusioncharts/rr92f6Lm/,Chart,Logarithmic Charts,Axes,,,A sample logarithmic multi-series column chart with inverse Y-axis
+,,http://jsfiddle.net/fusioncharts/8yx8gfaj/,Chart,Logarithmic Charts,Div Lines,,,Configuring divlines in logarithmic column chart
+Step Line Chart,Step Line Chart,http://jsfiddle.net/fusioncharts/DeFSs/,Chart,Step Line Charts,,,,A sample multi-series step line chart
+,Use Forward Steps,http://jsfiddle.net/fusioncharts/sdhbwv98/,Chart,Step Line Charts,,,,A sample step line chart with use of forward steps
+,Without Vertical Joins,http://jsfiddle.net/fusioncharts/5dm09d7y/,Chart,Step Line Charts,,,,A sample step line chart without vertical joins
+Kagi Chart,Kagi Chart,http://jsfiddle.net/fusioncharts/JRZ36/,Chart,Kagi Chart,,,,A sample Kagi chart 
