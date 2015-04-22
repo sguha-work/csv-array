@@ -2,7 +2,7 @@
 > Simple. lighweight, intelligent CSV-parser for nodeJS
 
 ## Dependencies
-This package got only two dependency of "fs", and "line-by-line".
+This package got only two dependencies of "fs", and "line-by-line".
 
 ## Change log
 * Performence improvement
