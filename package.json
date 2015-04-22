@@ -22,6 +22,7 @@
   "license": "MIT",
   "engines": "v0.8.15",
   "dependencies": {
-    "fs": "0.0.2"
+    "fs": "0.0.2",
+    "line-by-line": "~0.1.3"
   }
 }
