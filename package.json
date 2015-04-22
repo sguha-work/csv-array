@@ -1,7 +1,7 @@
 {
   "name": "csv-array",
-  "version": "0.0.13",
-  "description": "This is a CSV parser created and made for nodeJS. Which takes a csv file and produce an array from it",
+  "version": "0.0.14",
+  "description": "Intelligent CSV parser created and made for nodeJS. Which takes a csv file and produce an array from it.",
   "main": "csv-array.js",
   "scripts": {},
   "repository": {
@@ -16,7 +16,8 @@
 	"parse csv",
 	"convert csv",
 	"json",
-	"parser"
+	"parser",
+	"streaming"
   ],
   "author": "Sahasrangshu Guha",
   "license": "MIT",
