@@ -21,7 +21,7 @@ module.exports = {
 	parseFile : function(fileName, callBack) {
 		var presentInstance = this;
 		var fs = require('fs');
-		fs.readFile(fileName, 'utf-8', function(err, data) {
+		fs.readFile(fileName, 'utf-8', function(err, data) {console.log(data);return false;
 			var dataArray = presentInstance.getDataSeparatedByNewLine(data);
 			var finalDataArray = presentInstance.getDataArray(dataArray);
 			callBack(finalDataArray);
