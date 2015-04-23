@@ -50,7 +50,7 @@ module.exports = {
 			console.log("cannot read the file any more.");
 		});
 		
-		readStream.on('line', function(line) {console.log(line);
+		readStream.on('line', function(line) {
 			readStream.pause();
 			setTimeout(function () {
 				if(tempLineCounter == 0) {
@@ -72,6 +72,9 @@ module.exports = {
 		});
 		
 		readStream.on('end', function() {
+			if(tempDataArray.length == 0) {
+				tempDataArray = tempAttributeNameArray;
+			}
 			callBack(tempDataArray);
 		});
 	},
