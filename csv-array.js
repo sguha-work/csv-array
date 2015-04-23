@@ -1,5 +1,5 @@
 module.exports = {
-	maxSizeForDirectRead : 10000000,
+	maxSizeForDirectRead : 100,
 	parseCSV : function(fileName, callBack) {
 		var presentInstance = this;
 		var fs = require('fs');
@@ -21,7 +21,7 @@ module.exports = {
 	parseFile : function(fileName, callBack) {
 		var presentInstance = this;
 		var fs = require('fs');
-		fs.readFile(fileName, 'utf-8', function(err, data) {console.log(data);return false;
+		fs.readFile(fileName, 'utf-8', function(err, data) {
 			var dataArray = presentInstance.getDataSeparatedByNewLine(data);
 			var finalDataArray = presentInstance.getDataArray(dataArray);
 			callBack(finalDataArray);
@@ -29,7 +29,7 @@ module.exports = {
 	},
 
 	getDataSeparatedByNewLine : function(data) {
-		var dataArray = data.split("\n");
+		var dataArray = data.split("\r\n");
 		return dataArray;
 	},
 
@@ -95,7 +95,7 @@ module.exports = {
 			presentObject.buildOutputData(line);
 			setTimeout(function() {
 				readStream.resume();
-			},50);
+			},5);
 			
 		});
 		readStream.on('end', function() {
