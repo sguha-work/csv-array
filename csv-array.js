@@ -5,7 +5,7 @@ module.exports = {
 		var fs = require('fs');
 		fs.exists(fileName, function(exists) {
 			if(exists) {
-				presentInstance.parseBigFile(fileName, callBack);
+				presentInstance.parseFile(fileName, callBack);
 			} else {
 				console.log("The provided file " + fileName + " doesn't exists or inaccessible");
 			}
@@ -36,10 +36,8 @@ module.exports = {
 		}
 		return dataArray;
 	},
-	// tempLineCounter : 0,// only used for large files
-	// tempDataArray : [],// only used for large files
-	// tempAttributeNameArray : [],// only used for large files
-	parseBigFile : function(fileName, callBack) {
+	
+	parseFile : function(fileName, callBack) {
 		var presentObject = module.exports;
 		var lblReader = require('line-by-line');
 		var readStream = new lblReader(fileName);
