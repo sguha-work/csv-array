@@ -9,7 +9,7 @@ This package got only one dependencies of "line-by-line".
 * Removed dependency of fs
 * Streaming improvement by adding a tiny delay, it will increase execution time but also increase stability
 * Bug fix of parsing
-    * Fixed a bug in file containg single row
+    * Fixed a bug in file containg single coloumn
     
   
 
