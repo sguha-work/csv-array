@@ -36,45 +36,48 @@ module.exports = {
 		}
 		return dataArray;
 	},
-	tempLineCounter : 0,// only used for large files
-	tempDataArray : [],// only used for large files
-	tempAttributeNameArray : [],// only used for large files
+	// tempLineCounter : 0,// only used for large files
+	// tempDataArray : [],// only used for large files
+	// tempAttributeNameArray : [],// only used for large files
 	parseBigFile : function(fileName, callBack) {
 		var presentObject = module.exports;
 		var lblReader = require('line-by-line');
 		var readStream = new lblReader(fileName);
 
-		presentObject.tempDataArray = [];
-		presentObject.tempAttributeNameArray = [];
-		presentObject.tempLineCounter = 0;
+		var tempDataArray = [];
+		var tempAttributeNameArray = [];
+		var tempLineCounter = 0;
 		
 		readStream.on('error', function(){
 			console.log("cannot read the file any more.");
 		});
 		
 		readStream.on('line', function(line) {
-			presentObject.buildOutputData(line);
+			if(tempLineCounter == 0) {
+				tempAttributeNameArray = line.split(",");
+				tempLineCounter = 1;
+			} else {
+				tempDataArray.push(presentObject.buildOutputData(tempAttributeNameArray, line));
+			}
 		});
 		
 		readStream.on('end', function() {
-			callBack(presentObject.tempDataArray);
+			callBack(tempDataArray);
 		});
 	},
 
-	buildOutputData : function(line) {
+	buildOutputData : function(tempAttributeNameArray, line) {
 		var presentObject = module.exports;
-		if(presentObject.tempLineCounter == 0) {
-			presentObject.tempAttributeNameArray = line.split(",");
-		} else {
+		
 			var dataArray = presentObject.getDataFromLine(line);
 			var tempObject = {};
-			var tempAttributeNameArrayLength = presentObject.tempAttributeNameArray.length;
+			var tempAttributeNameArrayLength = tempAttributeNameArray.length;
 			for(var index=0; index<tempAttributeNameArrayLength; index++) {
-				tempObject[presentObject.tempAttributeNameArray[index]] = dataArray[index];
+				tempObject[tempAttributeNameArray[index]] = dataArray[index];
 			}
-			presentObject.tempDataArray.push(tempObject);
-		}
-		presentObject.tempLineCounter += 1;
+			return tempObject;
+		
+		
 	}
 
 }
