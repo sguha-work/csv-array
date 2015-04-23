@@ -7,8 +7,10 @@ This package got only one dependencies of "line-by-line".
 ## Change log
 * Performence improvement
 * Removed dependency of fs
-* Streaming improvement
+* Streaming improvement by adding a tiny delay, it will increase execution time but also increase stability
 * Bug fix of parsing
+    * Fixed a bug in file containg single row
+    
   
 
 ## Usage Guide
