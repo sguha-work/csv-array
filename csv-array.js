@@ -5,50 +5,11 @@ module.exports = {
 		var fs = require('fs');
 		fs.exists(fileName, function(exists) {
 			if(exists) {
-				fs.stat(fileName, function(err, stats){
-					if(stats.size > presentInstance.maxSizeForDirectRead) {
-						presentInstance.parseBigFile(fileName, callBack);
-					} else {
-						presentInstance.parseFile(fileName, callBack);	
-					}
-				});
+				presentInstance.parseBigFile(fileName, callBack);
 			} else {
 				console.log("The provided file " + fileName + " doesn't exists or inaccessible");
 			}
 		});
-	},
-
-	parseFile : function(fileName, callBack) {
-		var presentInstance = this;
-		var fs = require('fs');
-		fs.readFile(fileName, 'utf-8', function(err, data) {
-			var dataArray = presentInstance.getDataSeparatedByNewLine(data);
-			var finalDataArray = presentInstance.getDataArray(dataArray);
-			callBack(finalDataArray);
-		})
-	},
-
-	getDataSeparatedByNewLine : function(data) {
-		var dataArray = data.split("\r\n");
-		return dataArray;
-	},
-
-	// returns total data
-	getDataArray : function(dataArray) {
-		presentInstance = this;
-		var attributeNameArray = dataArray[0].split(",");
-		var finalArray = [];
-		var length = dataArray.length;
-		for(var index=1; index<length; index++) {
-			var tempArray = {};
-			var dataList = presentInstance.getDataFromLine(dataArray[index]);
-			var atrributeNameArrayLength = attributeNameArray.length;
-			for(var index2=0; index2<atrributeNameArrayLength; index2++) {
-				tempArray[attributeNameArray[index2]] = dataList[index2];
-			}
-			finalArray.push(tempArray);
-		}
-		return finalArray;
 	},
 
 	// returns data from a single line 
@@ -90,14 +51,11 @@ module.exports = {
 		readStream.on('error', function(){
 			console.log("cannot read the file any more.");
 		});
+		
 		readStream.on('line', function(line) {
-			readStream.pause();
 			presentObject.buildOutputData(line);
-			setTimeout(function() {
-				readStream.resume();
-			},5);
-			
 		});
+		
 		readStream.on('end', function() {
 			callBack(presentObject.tempDataArray);
 		});
