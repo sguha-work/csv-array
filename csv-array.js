@@ -50,13 +50,25 @@ module.exports = {
 			console.log("cannot read the file any more.");
 		});
 		
-		readStream.on('line', function(line) {
-			if(tempLineCounter == 0) {
-				tempAttributeNameArray = line.split(",");
-				tempLineCounter = 1;
-			} else {
-				tempDataArray.push(presentObject.buildOutputData(tempAttributeNameArray, line));
-			}
+		readStream.on('line', function(line) {console.log(line);
+			readStream.pause();
+			setTimeout(function () {
+				if(tempLineCounter == 0) {
+					tempAttributeNameArray = line.split(",");
+					if(tempAttributeNameArray.length == 1) {
+						tempDataArray.push(line);
+					}
+					tempLineCounter = 1;
+				} else {
+					if(tempAttributeNameArray.length == 1) {
+						tempDataArray.push(line);
+					} else {
+						tempDataArray.push(presentObject.buildOutputData(tempAttributeNameArray, line));
+					}
+				}
+		        readStream.resume();
+		    }, 2);
+			
 		});
 		
 		readStream.on('end', function() {
