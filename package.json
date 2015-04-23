@@ -1,6 +1,6 @@
 {
   "name": "csv-array",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Intelligent CSV parser created and made for nodeJS. Which takes a csv file and produce an array from it.",
   "main": "csv-array.js",
   "scripts": {},
@@ -23,7 +23,6 @@
   "license": "MIT",
   "engines": "v0.8.15",
   "dependencies": {
-    "fs": "0.0.2",
     "line-by-line": "~0.1.3"
   }
 }
