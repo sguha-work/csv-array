@@ -86,7 +86,7 @@ module.exports = {
 			var tempObject = {};
 			var tempAttributeNameArrayLength = tempAttributeNameArray.length;
 			for(var index=0; index<tempAttributeNameArrayLength; index++) {
-				tempObject[tempAttributeNameArray[index]] = dataArray[index];
+				tempObject[tempAttributeNameArray[index]] = ((typeof dataArray[index]!="undefined")?dataArray[index]:"");
 			}
 			return tempObject;
 		
