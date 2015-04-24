@@ -93,7 +93,7 @@ module.exports = {
 
 	buildOutputData : function(tempAttributeNameArray, line, considerFirstRowAsHeading) {
 		var presentObject = module.exports;
-		var dataArray = presentObject.getDataFromLine(line);console.log(JSON.stringify(dataArray));
+		var dataArray = presentObject.getDataFromLine(line);
 		if(!considerFirstRowAsHeading) {
 			if(tempAttributeNameArray.length == 1) {
 				return dataArray[0];

@@ -61,7 +61,7 @@ Output
       "Option 5":"",
       "Answer":"answer 2",
       "Deficulty":"3",
-      "Category":"tes"
+      "Category":"test"
    },
    {  
       "Question Statement":"this is another test question answer it?",
@@ -72,7 +72,7 @@ Output
       "Option 5":"answer7,answer8",
       "Answer":"answer1,answer2",
       "Deficulty":"2",
-      "Category":"tes"
+      "Category":"test"
    }
 ]
 ```
@@ -106,7 +106,7 @@ Output
       "",
       "answer 2",
       "3",
-      "tes"
+      "test"
    ],
    [  
       "this is another test question answer it?",
@@ -117,7 +117,7 @@ Output
       "answer7,answer8",
       "answer1,answer2",
       "2",
-      "tes"
+      "test"
    ]
 ]
 ``` 
@@ -127,6 +127,13 @@ Output
  csv.parseCSV("test.csv", function(data){
    console.log(JSON.stringify(data));
  }, true);
+ /*
+   The output will be as same as
+   var csv = require('csv-array');
+    csv.parseCSV("test.csv", function(data){
+      console.log(JSON.stringify(data));
+    });
+ */
 ``` 
 Output
 ```json
@@ -140,7 +147,7 @@ Output
       "Option 5":"",
       "Answer":"answer 2",
       "Deficulty":"3",
-      "Category":"tes"
+      "Category":"test"
    },
    {  
       "Question Statement":"this is another test question answer it?",
@@ -151,7 +158,7 @@ Output
       "Option 5":"answer7,answer8",
       "Answer":"answer1,answer2",
       "Deficulty":"2",
-      "Category":"tes"
+      "Category":"test"
    }
 ]
 ```
