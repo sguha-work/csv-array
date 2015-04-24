@@ -1,6 +1,6 @@
 {
   "name": "csv-array",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Intelligent CSV parser created and made for nodeJS. Which takes a csv file and produce an array from it.",
   "main": "csv-array.js",
   "scripts": {},
