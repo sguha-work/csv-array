@@ -16,27 +16,53 @@ module.exports = {
 	},
 
 	// returns data from a single line 
-	getDataFromLine : function(line) {
+	getDataFromLine : function(line) {console.log(line);
 		var dataArray = [];
 		var tempString="";
 		var lineLength = line.length;
-		for(var index=0; index<lineLength; index++) {
+		var index=0;
+		while(index<lineLength) {
+			// if(line[index]=='"') {
+			// 	var index2=index+1;
+			// 	while(line[index2]!='"') {
+			// 		tempString += line[index2];
+			// 		index2++;
+			// 	}
+			// 	dataArray.push(tempString);
+			// 	tempString = "";
+			// 	index = index2 + 1;
+			// 	continue;
+			// }else if(line[index] != "," && index<(lineLength)) {
+			// 	tempString += line[index];
+			// 	index++;
+			// 	continue;
+			// } else {
+			// 	dataArray.push(tempString);
+			// 	tempString = "";
+			// 	index++;
+			// 	continue;
+			// }
 			if(line[index]=='"') {
-				var index2=index+1;
+				var index2 = index+1;
 				while(line[index2]!='"') {
-					tempString += line[index2];
+					tempString+=line[index2];
 					index2++;
 				}
 				dataArray.push(tempString);
 				tempString = "";
-				index = index2 + 1;
-			}else if(line[index] != "," && index!=(lineLength-1)) {
+				index = index2+1;
+				continue;
+			}
+			if(line[index]!=",") {
 				tempString += line[index];
+				index++; continue;
 			} else {
 				dataArray.push(tempString);
 				tempString = "";
+				index++;continue;
 			}
-		}
+
+		}console.log(JSON.stringify(dataArray));
 		return dataArray;
 	},
 	
