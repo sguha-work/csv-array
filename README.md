@@ -9,7 +9,8 @@ This package got only one dependencies of "line-by-line".
 * Added option to "considerFirstRowAsHeading". See Usage Guide for details about using
 * Bug fix in data parsing
    * Truncation of data problem solved
-## Usage Guide
+
+
 
 ### Installing
 
