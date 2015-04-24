@@ -10,6 +10,7 @@ This package got only one dependencies of "line-by-line".
 * Streaming improvement by adding a tiny delay, it will increase execution time but also increase stability
 * Bug fix of parsing
     * Fixed a bug in file containg single coloumn
+    * Empty string if null
     
   
 
