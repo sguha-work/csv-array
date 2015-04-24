@@ -58,16 +58,17 @@ module.exports = {
 			setTimeout(function () {
 				if(tempLineCounter == 0) {
 					tempAttributeNameArray = line.split(",");
-					if(tempAttributeNameArray.length == 1 && !considerFirstRowAsHeading) {
-						tempDataArray.push(line);
+					if(!considerFirstRowAsHeading) {
+						if(tempAttributeNameArray.length == 1) {
+							tempDataArray.push(line);	
+						} else {
+							tempDataArray.push(tempAttributeNameArray);
+						}
 					}
 					tempLineCounter = 1;
 				} else {
-					if(tempAttributeNameArray.length == 1 && !considerFirstRowAsHeading) {
-						tempDataArray.push(line);
-					} else {
-						tempDataArray.push(presentObject.buildOutputData(tempAttributeNameArray, line));
-					}
+					tempDataArray.push(presentObject.buildOutputData(tempAttributeNameArray, line, considerFirstRowAsHeading));
+					
 				}
 		        readStream.resume();
 		    }, 2);
@@ -82,15 +83,23 @@ module.exports = {
 		});
 	},
 
-	buildOutputData : function(tempAttributeNameArray, line) {
+	buildOutputData : function(tempAttributeNameArray, line, considerFirstRowAsHeading) {
 		var presentObject = module.exports;
 		var dataArray = presentObject.getDataFromLine(line);
-		var tempObject = {};
-		var tempAttributeNameArrayLength = tempAttributeNameArray.length;
-		for(var index=0; index<tempAttributeNameArrayLength; index++) {
-			tempObject[tempAttributeNameArray[index]] = ((typeof dataArray[index]!="undefined")?dataArray[index]:"");
+		if(!considerFirstRowAsHeading) {
+			if(tempAttributeNameArray.length == 1) {
+				return dataArray[0];
+			} else {
+				return dataArray;
+			}
+		} else {
+			var tempObject = {};
+			var tempAttributeNameArrayLength = tempAttributeNameArray.length;
+			for(var index=0; index<tempAttributeNameArrayLength; index++) {
+				tempObject[tempAttributeNameArray[index]] = ((typeof dataArray[index]!="undefined")?dataArray[index]:"");
+			}
+			return tempObject;
 		}
-		return tempObject;
 	}
 
 }
