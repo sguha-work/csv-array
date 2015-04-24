@@ -1,5 +1,5 @@
 module.exports = {
-	maxSizeForDirectRead : 100,
+	
 	parseCSV : function(fileName, callBack) {
 		var presentInstance = this;
 		var fs = require('fs');
@@ -89,8 +89,6 @@ module.exports = {
 				tempObject[tempAttributeNameArray[index]] = ((typeof dataArray[index]!="undefined")?dataArray[index]:"");
 			}
 			return tempObject;
-		
-		
 	}
 
 }
