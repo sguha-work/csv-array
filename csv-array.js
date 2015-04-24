@@ -1,11 +1,14 @@
 module.exports = {
-	maxSizeForDirectRead : 100,
-	parseCSV : function(fileName, callBack) {
+	
+	parseCSV : function(fileName, callBack, considerFirstRowAsHeading) {
+		if(typeof considerFirstRowAsHeading == "undefined") {
+			considerFirstRowAsHeading = true;
+		}
 		var presentInstance = this;
 		var fs = require('fs');
 		fs.exists(fileName, function(exists) {
 			if(exists) {
-				presentInstance.parseFile(fileName, callBack);
+				presentInstance.parseFile(fileName, callBack, considerFirstRowAsHeading);
 			} else {
 				console.log("The provided file " + fileName + " doesn't exists or inaccessible");
 			}
@@ -17,27 +20,35 @@ module.exports = {
 		var dataArray = [];
 		var tempString="";
 		var lineLength = line.length;
-		for(var index=0; index<lineLength; index++) {
+		var index=0;
+		while(index<lineLength) {
 			if(line[index]=='"') {
-				var index2=index+1;
+				var index2 = index+1;
 				while(line[index2]!='"') {
-					tempString += line[index2];
+					tempString+=line[index2];
 					index2++;
 				}
 				dataArray.push(tempString);
 				tempString = "";
-				index = index2 + 1;
-			}else if(line[index] != ",") {
+				index = index2+2;
+				continue;
+			}
+			if(line[index]!=",") {
 				tempString += line[index];
-			} else {
+				index++; continue;
+			} 
+			if(line[index]==",") {
 				dataArray.push(tempString);
 				tempString = "";
+				index++;continue;
 			}
+
 		}
+		dataArray.push(tempString);
 		return dataArray;
 	},
 	
-	parseFile : function(fileName, callBack) {
+	parseFile : function(fileName, callBack, considerFirstRowAsHeading) {
 		var presentObject = module.exports;
 		var lblReader = require('line-by-line');
 		var readStream = new lblReader(fileName);
@@ -55,16 +66,17 @@ module.exports = {
 			setTimeout(function () {
 				if(tempLineCounter == 0) {
 					tempAttributeNameArray = line.split(",");
-					if(tempAttributeNameArray.length == 1) {
-						tempDataArray.push(line);
+					if(!considerFirstRowAsHeading) {
+						if(tempAttributeNameArray.length == 1) {
+							tempDataArray.push(line);	
+						} else {
+							tempDataArray.push(tempAttributeNameArray);
+						}
 					}
 					tempLineCounter = 1;
 				} else {
-					if(tempAttributeNameArray.length == 1) {
-						tempDataArray.push(line);
-					} else {
-						tempDataArray.push(presentObject.buildOutputData(tempAttributeNameArray, line));
-					}
+					tempDataArray.push(presentObject.buildOutputData(tempAttributeNameArray, line, considerFirstRowAsHeading));
+					
 				}
 		        readStream.resume();
 		    }, 2);
@@ -79,18 +91,23 @@ module.exports = {
 		});
 	},
 
-	buildOutputData : function(tempAttributeNameArray, line) {
+	buildOutputData : function(tempAttributeNameArray, line, considerFirstRowAsHeading) {
 		var presentObject = module.exports;
-		
-			var dataArray = presentObject.getDataFromLine(line);
+		var dataArray = presentObject.getDataFromLine(line);
+		if(!considerFirstRowAsHeading) {
+			if(tempAttributeNameArray.length == 1) {
+				return dataArray[0];
+			} else {
+				return dataArray;
+			}
+		} else {
 			var tempObject = {};
 			var tempAttributeNameArrayLength = tempAttributeNameArray.length;
 			for(var index=0; index<tempAttributeNameArrayLength; index++) {
 				tempObject[tempAttributeNameArray[index]] = ((typeof dataArray[index]!="undefined")?dataArray[index]:"");
 			}
 			return tempObject;
-		
-		
+		}
 	}
 
 }
