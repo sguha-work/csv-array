@@ -12,4 +12,4 @@ var fs = require('fs');
 csv.parseCSV("test3.csv", function(data){
 	fs.writeFile("test3.json", JSON.stringify(data), function(){console.log("done")});
 	
-},true);
+});

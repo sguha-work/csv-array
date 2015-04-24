@@ -16,32 +16,12 @@ module.exports = {
 	},
 
 	// returns data from a single line 
-	getDataFromLine : function(line) {console.log(line);
+	getDataFromLine : function(line) {
 		var dataArray = [];
 		var tempString="";
 		var lineLength = line.length;
 		var index=0;
 		while(index<lineLength) {
-			// if(line[index]=='"') {
-			// 	var index2=index+1;
-			// 	while(line[index2]!='"') {
-			// 		tempString += line[index2];
-			// 		index2++;
-			// 	}
-			// 	dataArray.push(tempString);
-			// 	tempString = "";
-			// 	index = index2 + 1;
-			// 	continue;
-			// }else if(line[index] != "," && index<(lineLength)) {
-			// 	tempString += line[index];
-			// 	index++;
-			// 	continue;
-			// } else {
-			// 	dataArray.push(tempString);
-			// 	tempString = "";
-			// 	index++;
-			// 	continue;
-			// }
 			if(line[index]=='"') {
 				var index2 = index+1;
 				while(line[index2]!='"') {
@@ -50,19 +30,21 @@ module.exports = {
 				}
 				dataArray.push(tempString);
 				tempString = "";
-				index = index2+1;
+				index = index2+2;
 				continue;
 			}
 			if(line[index]!=",") {
 				tempString += line[index];
 				index++; continue;
-			} else {
+			} 
+			if(line[index]==",") {
 				dataArray.push(tempString);
 				tempString = "";
 				index++;continue;
 			}
 
-		}console.log(JSON.stringify(dataArray));
+		}
+		dataArray.push(tempString);
 		return dataArray;
 	},
 	
@@ -111,7 +93,7 @@ module.exports = {
 
 	buildOutputData : function(tempAttributeNameArray, line, considerFirstRowAsHeading) {
 		var presentObject = module.exports;
-		var dataArray = presentObject.getDataFromLine(line);
+		var dataArray = presentObject.getDataFromLine(line);console.log(JSON.stringify(dataArray));
 		if(!considerFirstRowAsHeading) {
 			if(tempAttributeNameArray.length == 1) {
 				return dataArray[0];
