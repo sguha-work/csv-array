@@ -2,7 +2,17 @@
 > Simple. lighweight, intelligent CSV-parser for nodeJS
 
 ## Dependencies
-This package got only one dependency of "fs". You may install that first using following command
+This package got only one dependencies of "line-by-line".
+
+## Change log
+* Performence improvement
+* Removed dependency of fs
+* Streaming improvement by adding a tiny delay, it will increase execution time but also increase stability
+* Bug fix of parsing
+    * Fixed a bug in file containg single coloumn
+    * Empty string if null
+    
+  
 
 ## Usage Guide
 
