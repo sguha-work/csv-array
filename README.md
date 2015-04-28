@@ -5,10 +5,7 @@
 This package got only one dependencies of "line-by-line".
 
 ## Change log
-* Reduced number of variables used
-* Added option to "considerFirstRowAsHeading". See Usage Guide for details about using
-* Bug fix in data parsing
-   * Truncation of data problem solved
+* Dramatic improvement in speed.. Please forget version 0.0.1x
 
 
 ## Usage Guide
