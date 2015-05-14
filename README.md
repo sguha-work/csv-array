@@ -4,8 +4,8 @@
 ## Dependencies
 This package got only one dependencies of "line-by-line".
 
-## Change log
-* Dramatic improvement in speed.. Please forget version 0.0.1x
+## Changes to be made
+* Have to solve the issue of parsing in ubuntu
 
 
 ## Usage Guide
