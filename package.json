@@ -1,6 +1,6 @@
 {
   "name": "csv-array",
-  "version": "0.0.2",
+  "version": "0.0.21",
   "description": "Intelligent CSV parser created and made for nodeJS. Which takes a csv file and produce an array from it.",
   "main": "csv-array.js",
   "scripts": {},
@@ -9,20 +9,21 @@
     "url": "https://github.com/sguha-work/csv-array.git"
   },
   "keywords": [
-	"csv",
-	"array",
-	"csv-array",
-	"parsing",
-	"parse csv",
-	"convert csv",
-	"json",
-	"parser",
-	"streaming"
+    "csv",
+    "array",
+    "csv-array",
+    "parsing",
+    "parse csv",
+    "convert csv",
+    "json",
+    "parser",
+    "streaming"
   ],
   "author": "Sahasrangshu Guha",
   "license": "MIT",
   "engines": "v0.8.15",
   "dependencies": {
+    "fs": "0.0.2",
     "line-by-line": "~0.1.3"
   }
 }
