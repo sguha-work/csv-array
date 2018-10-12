@@ -5,7 +5,27 @@ class CSVArray {
 	 */
 	checkOption(userGivenOption) {
 		let systemGeneretedOption;
-		return systemGeneretedOption;
+		systemGeneretedOption = {
+			fileoutput: false,
+			outputfilename: null,
+			firstlineasheading: true
+		}
+		if(typeof userGivenOption === 'undefined' || userGivenOption === null) {
+			return systemGeneretedOption;
+		} else {
+			if(typeof userGivenOption.fileoutput !== 'undefined' && userGivenOption.fileoutput !==null && (userGivenOption.fileoutput === true || userGivenOption.fileoutput === false)) {
+				systemGeneretedOption.fileoutput = userGivenOption.fileoutput;
+			}
+			if(typeof userGivenOption.outputfilename !== 'undefined' && userGivenOption.outputfilename !==null && userGivenOption.outputfilename !== '') {
+				systemGeneretedOption.outputfilename = userGivenOption.outputfilename;
+			} else {
+				// this block will be executed if output file name is empty in user given object
+				if(systemGeneretedOption.fileoutput) {
+					systemGeneretedOption.outputfilename = Date.now() + '.json';
+				}
+			}
+			return systemGeneretedOption;
+		}
 	}
 
 	/**
