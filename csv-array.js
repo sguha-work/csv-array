@@ -1,10 +1,15 @@
 class CSVArray {
+	/**
+	 * This function checks the user given options and also it populates the default option
+	 * @param {*} userGivenOption 
+	 */
 	checkOption(userGivenOption) {
 		let systemGeneretedOption;
 		return systemGeneretedOption;
 	}
+
 	/**
-	 * 
+	 * This is the main function to begin the parsing
 	 * @param {*} fileName 
 	 * @param {*} option 
 	 */
