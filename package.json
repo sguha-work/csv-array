@@ -1,9 +1,14 @@
 {
   "name": "csv-array",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Intelligent CSV parser created and made for nodeJS. Which takes a csv file and produce an array from it.",
-  "main": "csv-array.js",
-  "scripts": {},
+  "main": "dist/csv-array.js",
+  "types": "dist/csv-array.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sguha-work/csv-array.git"
@@ -17,12 +22,21 @@
     "convert csv",
     "json",
     "parser",
-    "streaming"
+    "streaming",
+    "typescript",
+    "worker-threads"
   ],
   "author": "Sahasrangshu Guha",
   "license": "MIT",
-  "engines": "v0.8.15",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
     "line-by-line": "~0.1.3"
+  },
+  "devDependencies": {
+    "@types/line-by-line": "^0.1.1",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
   }
 }
