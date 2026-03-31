@@ -15,21 +15,6 @@ export type CSVRow = CSVObjectRow | string[] | string;
 /** Callback signature that consumers may supply to parseCSV */
 export type ParseCSVCallback = (data: CSVRow[]) => void;
 /**
- * Parses a single CSV line and returns an array of field values.
- * Handles quoted fields that may contain commas.
- */
-declare function getDataFromLine(line: string): string[];
-/**
- * Builds the output row for a given raw line, using the header array and the
- * considerFirstRowAsHeading flag to decide what shape the return value takes.
- */
-declare function buildOutputData(tempAttributeNameArray: string[], line: string, considerFirstRowAsHeading: boolean): CSVRow;
-/**
- * Parses the file using the main-thread line-by-line reader.
- * Used for files that are ≤ 3 MB.
- */
-declare function parseFile(fileName: string, resolve: (data: CSVRow[]) => void, considerFirstRowAsHeading: boolean): void;
-/**
  * Parses a CSV file and delivers the parsed rows either via callback or Promise.
  *
  * @param fileName                  - Path to the CSV file
@@ -49,14 +34,4 @@ declare function parseFile(fileName: string, resolve: (data: CSVRow[]) => void, 
  */
 export declare function parseCSV(fileName: string, callBack: ParseCSVCallback, considerFirstRowAsHeading?: boolean): void;
 export declare function parseCSV(fileName: string, callBack?: undefined, considerFirstRowAsHeading?: boolean): Promise<CSVRow[]>;
-declare const csvArray: {
-    parseCSV: typeof parseCSV;
-    /** @internal Exposed for testing; prefer parseCSV for normal use */
-    getDataFromLine: typeof getDataFromLine;
-    /** @internal Exposed for testing; prefer parseCSV for normal use */
-    buildOutputData: typeof buildOutputData;
-    /** @internal Exposed for testing; prefer parseCSV for normal use */
-    parseFile: typeof parseFile;
-};
-export default csvArray;
 //# sourceMappingURL=csv-array.d.ts.map

@@ -1,0 +1,5 @@
+node_modules
+*.tsbuildinfo
+src/
+test.mjs
+data.csv

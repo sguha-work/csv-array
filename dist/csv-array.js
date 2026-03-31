@@ -170,15 +170,4 @@ function parseCSV(fileName, callBack, considerFirstRowAsHeading = true) {
     }
     return new Promise((resolve) => run(resolve));
 }
-// ─── Default export (mirrors original module.exports shape) ──────────────────
-const csvArray = {
-    parseCSV,
-    /** @internal Exposed for testing; prefer parseCSV for normal use */
-    getDataFromLine,
-    /** @internal Exposed for testing; prefer parseCSV for normal use */
-    buildOutputData,
-    /** @internal Exposed for testing; prefer parseCSV for normal use */
-    parseFile,
-};
-exports.default = csvArray;
 //# sourceMappingURL=csv-array.js.map

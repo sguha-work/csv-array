@@ -1,13 +1,19 @@
 {
   "name": "csv-array",
+  "type":"module",
   "version": "0.0.23",
   "description": "Intelligent CSV parser created and made for nodeJS. Which takes a csv file and produce an array from it.",
   "main": "dist/csv-array.js",
   "types": "dist/csv-array.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
