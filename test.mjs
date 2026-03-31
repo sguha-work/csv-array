@@ -6,8 +6,8 @@
  * data.csv is ~8.4 MB, so it exercises the Worker-thread path (> 3 MB threshold).
  */
 
-import index from "./dist/index.js";
-const { parseCSV } = index;
+import { parseCSV } from "./dist/csv-array.js";
+
 
 // ─── Tiny test runner ────────────────────────────────────────────────────────
 

@@ -1,4 +1,3 @@
-"use strict";
 /**
  * csv-array.ts
  * TypeScript port of csv-array.js
@@ -9,15 +8,13 @@
  *
  * Compiles to ES2022 / CommonJS via tsconfig.json.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseCSV = parseCSV;
-const fs_1 = __importDefault(require("fs"));
-const path_1 = __importDefault(require("path"));
-const worker_threads_1 = require("worker_threads");
-const line_by_line_1 = __importDefault(require("line-by-line"));
+import fs from "fs";
+import path from "path";
+import { Worker } from "worker_threads";
+import LineByLine from "line-by-line";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // ─── Constants ───────────────────────────────────────────────────────────────
 /** Files larger than this (bytes) will be parsed on a dedicated Worker thread */
 const LARGE_FILE_THRESHOLD_BYTES = 3 * 1024 * 1024; // 3 MB
@@ -86,7 +83,7 @@ function buildOutputData(tempAttributeNameArray, line, considerFirstRowAsHeading
  * Used for files that are ≤ 3 MB.
  */
 function parseFile(fileName, resolve, considerFirstRowAsHeading) {
-    const readStream = new line_by_line_1.default(fileName);
+    const readStream = new LineByLine(fileName);
     const tempDataArray = [];
     let tempAttributeNameArray = [];
     let tempLineCounter = 0;
@@ -123,8 +120,8 @@ function parseFile(fileName, resolve, considerFirstRowAsHeading) {
  */
 function parseFileInWorker(fileName, resolve, considerFirstRowAsHeading) {
     // Resolve the compiled worker path (dist/csv-worker.js)
-    const workerScriptPath = path_1.default.resolve(__dirname, "csv-worker.js");
-    const worker = new worker_threads_1.Worker(workerScriptPath, {
+    const workerScriptPath = path.resolve(__dirname, "csv-worker.js");
+    const worker = new Worker(workerScriptPath, {
         workerData: { fileName, considerFirstRowAsHeading },
     });
     worker.on("message", (msg) => {
@@ -144,11 +141,11 @@ function parseFileInWorker(fileName, resolve, considerFirstRowAsHeading) {
         }
     });
 }
-function parseCSV(fileName, callBack, considerFirstRowAsHeading = true) {
+export function parseCSV(fileName, callBack, considerFirstRowAsHeading = true) {
     const run = (resolve) => {
-        fs_1.default.exists(fileName, (exists) => {
+        fs.exists(fileName, (exists) => {
             if (exists) {
-                const stat = fs_1.default.statSync(fileName);
+                const stat = fs.statSync(fileName);
                 const fileSizeBytes = stat.size;
                 if (fileSizeBytes > LARGE_FILE_THRESHOLD_BYTES) {
                     // Large file → off-load to a Worker thread

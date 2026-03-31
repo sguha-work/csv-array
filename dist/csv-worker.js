@@ -1,4 +1,3 @@
-"use strict";
 /**
  * csv-worker.ts
  * Worker thread that handles CSV parsing for large files (> 3MB).
@@ -6,12 +5,8 @@
  * processes the file using line-by-line, and posts the result back
  * to the main thread via parentPort.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const worker_threads_1 = require("worker_threads");
-const line_by_line_1 = __importDefault(require("line-by-line"));
+import { workerData, parentPort } from "worker_threads";
+import LineByLine from "line-by-line";
 /**
  * Parses a single CSV line and returns an array of field values.
  * Handles quoted fields that may contain commas.
@@ -71,13 +66,13 @@ function buildOutputData(tempAttributeNameArray, line, considerFirstRowAsHeading
         return tempObject;
     }
 }
-const { fileName, considerFirstRowAsHeading } = worker_threads_1.workerData;
-const readStream = new line_by_line_1.default(fileName);
+const { fileName, considerFirstRowAsHeading } = workerData;
+const readStream = new LineByLine(fileName);
 const tempDataArray = [];
 let tempAttributeNameArray = [];
 let tempLineCounter = 0;
 readStream.on("error", () => {
-    worker_threads_1.parentPort?.postMessage({ error: "Cannot read the file any more." });
+    parentPort?.postMessage({ error: "Cannot read the file any more." });
 });
 readStream.on("line", (line) => {
     readStream.pause();
@@ -100,6 +95,6 @@ readStream.on("line", (line) => {
 });
 readStream.on("end", () => {
     const result = tempDataArray.length === 0 ? tempAttributeNameArray : tempDataArray;
-    worker_threads_1.parentPort?.postMessage({ data: result });
+    parentPort?.postMessage({ data: result });
 });
 //# sourceMappingURL=csv-worker.js.map

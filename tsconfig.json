@@ -18,8 +18,7 @@
   },
   "include": [
     "src/csv-array.ts",
-    "src/csv-worker.ts",
-    "src/index.ts"
+    "src/csv-worker.ts"
   ],
   "exclude": [
     "node_modules",

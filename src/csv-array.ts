@@ -13,6 +13,10 @@ import fs from "fs";
 import path from "path";
 import { Worker } from "worker_threads";
 import LineByLine from "line-by-line";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
