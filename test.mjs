@@ -3,7 +3,7 @@
  *
  * Run with:  node test.mjs
  *
- * data.csv is ~8.4 MB, so it exercises the Worker-thread path (> 3 MB threshold).
+ * data.csv is ~8.4 MB, so it exercises the Worker-thread path (> 10 MB threshold).
  */
 
 import { parseCSV } from "./dist/csv-array.js";
@@ -131,9 +131,31 @@ try {
   failed++;
 }
 
-// ── 4. parseCSV — Non-existent file (graceful degradation) ───────────────
+// ── 4. parseCSV(data.csv) — Pagination ─────────────────────────────────────
 
-section("4. parseCSV — non-existent file (graceful degradation)");
+section("4. parseCSV Promise — Pagination (data.csv)");
+
+try {
+  const rows = await parseCSV("data.csv", undefined, true, { start: 10, count: 5 });
+
+  assert("pagination resolves to an array", Array.isArray(rows));
+  assert("pagination row count exactly 5", rows.length === 5, `rows.length = ${rows.length}`);
+
+  const first = rows[0];
+  assert("paginated first row is a plain object",
+    typeof first === "object" && !Array.isArray(first));
+  assert("paginated first row has 'Year'", "Year" in first);
+
+  console.log(`\n  ℹ️   Paginated total rows returned: ${rows.length}`);
+  console.log(`  ℹ️   First paginated row: ${JSON.stringify(first)}`);
+} catch (err) {
+  console.error("  ❌  Promise (Pagination) threw:", err);
+  failed++;
+}
+
+// ── 5. parseCSV — Non-existent file (graceful degradation) ───────────────
+
+section("5. parseCSV — non-existent file (graceful degradation)");
 
 // The library should log a warning and NOT resolve/reject.
 // We race against a short timeout to confirm behaviour.

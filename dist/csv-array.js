@@ -118,11 +118,11 @@ function parseFile(fileName, resolve, considerFirstRowAsHeading) {
  * Offloads parsing to a Worker thread (used when file size > 3 MB).
  * The compiled worker script is expected at dist/csv-worker.js.
  */
-function parseFileInWorker(fileName, resolve, considerFirstRowAsHeading) {
+function parseFileInWorker(fileName, resolve, considerFirstRowAsHeading, pagination) {
     // Resolve the compiled worker path (dist/csv-worker.js)
     const workerScriptPath = path.resolve(__dirname, "csv-worker.js");
     const worker = new Worker(workerScriptPath, {
-        workerData: { fileName, considerFirstRowAsHeading },
+        workerData: { fileName, considerFirstRowAsHeading, pagination },
     });
     worker.on("message", (msg) => {
         if (msg.error) {
@@ -141,7 +141,7 @@ function parseFileInWorker(fileName, resolve, considerFirstRowAsHeading) {
         }
     });
 }
-export function parseCSV(fileName, callBack, considerFirstRowAsHeading = true) {
+export function parseCSV(fileName, callBack, considerFirstRowAsHeading = true, pagination) {
     const run = (resolve) => {
         fs.exists(fileName, (exists) => {
             if (exists) {
@@ -149,7 +149,11 @@ export function parseCSV(fileName, callBack, considerFirstRowAsHeading = true) {
                 const fileSizeBytes = stat.size;
                 if (fileSizeBytes > LARGE_FILE_THRESHOLD_BYTES) {
                     // Large file → off-load to a Worker thread
-                    parseFileInWorker(fileName, resolve, considerFirstRowAsHeading);
+                    const activePagination = pagination ?? { start: 0, count: 100 };
+                    if (activePagination.count > 10000) {
+                        console.warn("Warning: count is set more than 10000");
+                    }
+                    parseFileInWorker(fileName, resolve, considerFirstRowAsHeading, activePagination);
                 }
                 else {
                     // Small / medium file → parse on the main thread

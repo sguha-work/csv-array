@@ -12,6 +12,10 @@
 export type CSVObjectRow = Record<string, string>;
 /** A row parsed without headings: array of cell strings, or a bare string */
 export type CSVRow = CSVObjectRow | string[] | string;
+export type Pagination = {
+    start: number;
+    count: number;
+};
 /** Callback signature that consumers may supply to parseCSV */
 export type ParseCSVCallback = (data: CSVRow[]) => void;
 /**
@@ -32,6 +36,6 @@ export type ParseCSVCallback = (data: CSVRow[]) => void;
  * @example — promise style
  * const rows = await parseCSV('data.csv');
  */
-export declare function parseCSV(fileName: string, callBack: ParseCSVCallback, considerFirstRowAsHeading?: boolean): void;
-export declare function parseCSV(fileName: string, callBack?: undefined, considerFirstRowAsHeading?: boolean): Promise<CSVRow[]>;
+export declare function parseCSV(fileName: string, callBack: ParseCSVCallback, considerFirstRowAsHeading?: boolean, pagination?: Pagination): void;
+export declare function parseCSV(fileName: string, callBack?: undefined, considerFirstRowAsHeading?: boolean, pagination?: Pagination): Promise<CSVRow[]>;
 //# sourceMappingURL=csv-array.d.ts.map

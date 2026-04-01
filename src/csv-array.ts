@@ -26,13 +26,18 @@ export type CSVObjectRow = Record<string, string>;
 /** A row parsed without headings: array of cell strings, or a bare string */
 export type CSVRow = CSVObjectRow | string[] | string;
 
+export type Pagination = {
+  start: number;
+  count: number;
+};
+
 /** Callback signature that consumers may supply to parseCSV */
 export type ParseCSVCallback = (data: CSVRow[]) => void;
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 /** Files larger than this (bytes) will be parsed on a dedicated Worker thread */
-const LARGE_FILE_THRESHOLD_BYTES = 3 * 1024 * 1024; // 3 MB
+const LARGE_FILE_THRESHOLD_BYTES = 10 * 1024 * 1024; // 10 MB
 
 // ─── Internal helpers ────────────────────────────────────────────────────────
 
@@ -157,13 +162,14 @@ function parseFile(
 function parseFileInWorker(
   fileName: string,
   resolve: (data: CSVRow[]) => void,
-  considerFirstRowAsHeading: boolean
+  considerFirstRowAsHeading: boolean,
+  pagination: Pagination
 ): void {
   // Resolve the compiled worker path (dist/csv-worker.js)
   const workerScriptPath = path.resolve(__dirname, "csv-worker.js");
 
   const worker = new Worker(workerScriptPath, {
-    workerData: { fileName, considerFirstRowAsHeading },
+    workerData: { fileName, considerFirstRowAsHeading, pagination },
   });
 
   worker.on(
@@ -211,17 +217,20 @@ function parseFileInWorker(
 export function parseCSV(
   fileName: string,
   callBack: ParseCSVCallback,
-  considerFirstRowAsHeading?: boolean
+  considerFirstRowAsHeading?: boolean,
+  pagination?: Pagination
 ): void;
 export function parseCSV(
   fileName: string,
   callBack?: undefined,
-  considerFirstRowAsHeading?: boolean
+  considerFirstRowAsHeading?: boolean,
+  pagination?: Pagination
 ): Promise<CSVRow[]>;
 export function parseCSV(
   fileName: string,
   callBack?: ParseCSVCallback,
-  considerFirstRowAsHeading = true
+  considerFirstRowAsHeading = true,
+  pagination?: Pagination
 ): void | Promise<CSVRow[]> {
   const run = (resolve: (data: CSVRow[]) => void): void => {
     fs.exists(fileName, (exists: boolean) => {
@@ -231,7 +240,11 @@ export function parseCSV(
 
         if (fileSizeBytes > LARGE_FILE_THRESHOLD_BYTES) {
           // Large file → off-load to a Worker thread
-          parseFileInWorker(fileName, resolve, considerFirstRowAsHeading);
+          const activePagination = pagination ?? { start: 0, count: 100 };
+          if (activePagination.count > 10000) {
+            console.warn("Warning: count is set more than 10000");
+          }
+          parseFileInWorker(fileName, resolve, considerFirstRowAsHeading, activePagination);
         } else {
           // Small / medium file → parse on the main thread
           parseFile(fileName, resolve, considerFirstRowAsHeading);

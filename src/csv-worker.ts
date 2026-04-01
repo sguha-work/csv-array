@@ -12,6 +12,7 @@ import LineByLine from "line-by-line";
 interface WorkerInput {
   fileName: string;
   considerFirstRowAsHeading: boolean;
+  pagination: { start: number; count: number };
 }
 
 /**
@@ -80,12 +81,13 @@ function buildOutputData(
   }
 }
 
-const { fileName, considerFirstRowAsHeading } = workerData as WorkerInput;
+const { fileName, considerFirstRowAsHeading, pagination } = workerData as WorkerInput;
 
 const readStream = new LineByLine(fileName);
 const tempDataArray: (Record<string, string> | string[] | string)[] = [];
 let tempAttributeNameArray: string[] = [];
 let tempLineCounter = 0;
+let dataRowCount = 0;
 
 readStream.on("error", () => {
   parentPort?.postMessage({ error: "Cannot read the file any more." });
@@ -97,17 +99,31 @@ readStream.on("line", (line: string) => {
   if (tempLineCounter === 0) {
     tempAttributeNameArray = line.split(",");
     if (!considerFirstRowAsHeading) {
-      if (tempAttributeNameArray.length === 1) {
-        tempDataArray.push(line);
-      } else {
-        tempDataArray.push(tempAttributeNameArray);
+      if (dataRowCount >= pagination.start && dataRowCount < pagination.start + pagination.count) {
+        if (tempAttributeNameArray.length === 1) {
+          tempDataArray.push(line);
+        } else {
+          tempDataArray.push(tempAttributeNameArray);
+        }
       }
+      dataRowCount++;
     }
     tempLineCounter = 1;
   } else {
-    tempDataArray.push(
-      buildOutputData(tempAttributeNameArray, line, considerFirstRowAsHeading)
-    );
+    if (dataRowCount >= pagination.start && dataRowCount < pagination.start + pagination.count) {
+      tempDataArray.push(
+        buildOutputData(tempAttributeNameArray, line, considerFirstRowAsHeading)
+      );
+    }
+    dataRowCount++;
+    
+    // Stop reading early if we have fulfilled the pagination count
+    if (dataRowCount >= pagination.start + pagination.count) {
+      // @ts-ignore - LineByLine has a close method but it might not be in the typings
+      if (typeof readStream.close === "function") {
+        readStream.close();
+      }
+    }
   }
 
   readStream.resume();
@@ -115,6 +131,8 @@ readStream.on("line", (line: string) => {
 
 readStream.on("end", () => {
   const result =
-    tempDataArray.length === 0 ? tempAttributeNameArray : tempDataArray;
+    tempDataArray.length === 0 && pagination.start === 0 && dataRowCount === 0
+      ? tempAttributeNameArray
+      : tempDataArray;
   parentPort?.postMessage({ data: result });
 });
