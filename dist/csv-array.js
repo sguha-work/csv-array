@@ -17,7 +17,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // ─── Constants ───────────────────────────────────────────────────────────────
 /** Files larger than this (bytes) will be parsed on a dedicated Worker thread */
-const LARGE_FILE_THRESHOLD_BYTES = 3 * 1024 * 1024; // 3 MB
+const LARGE_FILE_THRESHOLD_BYTES = 10 * 1024 * 1024; // 10 MB
 // ─── Internal helpers ────────────────────────────────────────────────────────
 /**
  * Parses a single CSV line and returns an array of field values.
